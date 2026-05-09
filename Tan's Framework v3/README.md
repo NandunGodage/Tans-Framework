@@ -1,6 +1,15 @@
-# Tan's Framework — v2.0.0
+# Tan's Framework — v3.0.0
 
 A plug-and-play project management framework for AI-assisted development. Drop it into any project and get structured git workflows, automatic changelogs, daily work tracking, and guided setup — all enforced by your AI coding assistant.
+
+---
+
+## What's New in v3.0.0
+
+### Fixes & Improvements
+- **Commit without deploying** — After pushing to dev (or main), the AI now asks "want to merge and deploy, or keep working?" instead of forcing you through the full pipeline every time. Use `/deploy` when you're ready.
+- **GIT-GUIDE.md supports both branch strategies** — The team guide now covers both development-branch and direct-to-main workflows, matching whatever was chosen during setup.
+- **Session start no longer fails without a remote** — Brand new projects after `git init` won't error on pull. The AI only pulls if a remote is configured.
 
 ---
 
@@ -135,8 +144,8 @@ Here's what a typical session looks like after setup:
 4. AI updates `PROJECT-TRACKER.md` with today's work
 5. AI commits to `development` (waits for your OK)
 6. AI pushes to remote `development` (waits for your OK)
-7. AI shows you the diff between dev and main for review
-8. AI merges to `main` and deploys (waits for your OK at each step)
+7. AI asks: "Want to merge and deploy, or keep working?"
+8. When you're ready — AI shows the diff, merges to `main`, and deploys (waits for your OK at each step)
 
 No steps skipped. No surprise deployments. Full history of everything.
 
@@ -146,7 +155,8 @@ No steps skipped. No surprise deployments. Full history of everything.
 
 | Version | Date | What Changed |
 |---------|------|-------------|
-| v2.0.0 | 2026-05-07 | Added user commands, session start behavior, git init detection, branch strategy support, confirmation rejection handling, diff review, tracker fix, ABOUT.md fix |
+| v3.0.0 | 2026-05-07 | Commit-without-deploy flow, GIT-GUIDE supports both branch strategies, session start handles missing remote |
+| v2.0.0 | 2026-05-07 | User commands, session start behavior, git init detection, branch strategy support, confirmation rejection handling, diff review, tracker fix, ABOUT.md fix |
 | v1.0.0 | — | Initial release — core workflow, changelog, tracker, git procedure, team guide |
 
 ---
