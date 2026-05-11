@@ -16,17 +16,17 @@ A plug-and-play project management framework for AI-assisted development. Drop i
 ## What's New in v2.0.0
 
 ### New Features
-- **User Commands** — `/deploy`, `/status`, and `/release <version>` let you trigger common actions instantly
-- **Session Start Behavior** — AI now greets you with project context, checks your branch, and pulls latest changes at the start of every session
-- **Git Init & .gitignore Detection** — Framework detects if your project isn't a git repo yet and offers to set it up, including a .gitignore tailored to your tech stack
+- **User Commands** — `/deploy`, `/status`, and `/release <version>` let you trigger common actions instantly.
+- **Session Start Behavior** — AI now greets you with project context, checks your branch, and pulls latest changes at the start of every session.
+- **Git Init & .gitignore Detection** — Framework detects if your project isn't a git repo yet and offers to set it up, including a .gitignore tailored to your tech stack.
 
 ### Fixes & Improvements
-- **Branch strategy choice is now respected** — Saying "no" to a development branch gives you a direct-to-main workflow instead of being ignored
-- **"No" at confirmation steps is now handled** — AI asks what you'd like to change instead of being stuck or guessing
-- **`/deploy` now pulls latest main first** — Prevents merging into stale local main
-- **`/release` now updates PROJECT-TRACKER.md** — Follows the framework's own "update tracker before every commit" rule
-- **Review step now shows a diff** — AI runs `git log` and `git diff --stat` so you can actually see what's being merged instead of figuring it out yourself
-- **Fixed ABOUT.md referencing non-existent file** — Was pointing to `CLAUDE.md` instead of `AI-INSTRUCTIONS.md`
+- **Branch strategy choice is now respected** — Saying "no" to a development branch gives you a direct-to-main workflow instead of being ignored.
+- **"No" at confirmation steps is now handled** — AI asks what you'd like to change instead of being stuck or guessing.
+- **`/deploy` now pulls latest main first** — Prevents merging into stale local main.
+- **`/release` now updates PROJECT-TRACKER.md** — Follows the framework's own "update tracker before every commit" rule.
+- **Review step now shows a diff** — AI runs `git log` and `git diff --stat` so you can actually see what's being merged.
+- **Fixed ABOUT.md referencing non-existent file** — Was pointing to `CLAUDE.md` instead of `AI-INSTRUCTIONS.md`.
 
 ---
 
@@ -99,7 +99,7 @@ Type these at any time during a session:
 |---------|-------------|
 | `/deploy` | Merge dev to main and deploy — for when you've already reviewed |
 | `/status` | Show today's work, changelog state, current branch, and uncommitted changes |
-| `/release v1.2.0` | Move unreleased changelog items under a new version and kick off deploy |
+| `/release <version>` | Move unreleased changelog items under a new version and kick off deploy |
 
 ---
 
@@ -107,7 +107,7 @@ Type these at any time during a session:
 
 ```bash
 # Clone the framework
-git clone https://github.com/your-username/tans-framework.git
+git clone https://github.com/NandunGodage/Tans-Framework.git
 
 # Copy the files into your project
 cp tans-framework/AI-INSTRUCTIONS.md your-project/
@@ -121,33 +121,6 @@ cp tans-framework/ABOUT.md your-project/
 ```
 
 Or just download the files directly and drop them into your project root.
-
----
-
-## Works With
-
-**AI Assistants:** Claude Code, Cursor, Windsurf, GitHub Copilot, or any AI tool that reads project files.
-
-**Deployment Platforms:** Cloudflare Workers, Vercel, Netlify, AWS, Railway, Fly.io, DigitalOcean, GitHub Pages, self-hosted — anything with a CLI deploy command.
-
-**Tech Stacks:** Python, Node.js, React, Next.js, vanilla JS, Go, Rust — completely stack-agnostic.
-
----
-
-## Example Workflow
-
-Here's what a typical session looks like after setup:
-
-1. You ask the AI to build a feature
-2. AI implements the changes
-3. AI updates `CHANGELOG.md` with what changed and who did it
-4. AI updates `PROJECT-TRACKER.md` with today's work
-5. AI commits to `development` (waits for your OK)
-6. AI pushes to remote `development` (waits for your OK)
-7. AI asks: "Want to merge and deploy, or keep working?"
-8. When you're ready — AI shows the diff, merges to `main`, and deploys (waits for your OK at each step)
-
-No steps skipped. No surprise deployments. Full history of everything.
 
 ---
 
