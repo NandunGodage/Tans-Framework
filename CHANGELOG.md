@@ -6,33 +6,33 @@ Format: Each entry includes the version, date, what was changed, and who made th
 
 ---
 
-## [Unreleased]
+## [3.0.0] - 2026-05-11
 
-_Changes that haven't been tagged with a version yet._
+### Added
+- **Commit without deploying** — After pushing to dev (or main), the AI now asks "want to merge and deploy, or keep working?" instead of forcing you through the full pipeline every time.
+- **GIT-GUIDE.md supports both branch strategies** — The team guide now covers both development-branch and direct-to-main workflows.
+- **Session start handles missing remote** — Brand new projects after `git init` won't error on pull if no remote is configured.
 
 ---
 
-<!--
-## [v0.1.0] - YYYY-MM-DD
+## [2.0.0] - 2026-05-07
 
 ### Added
-- Description of what was added — @who
-
-### Changed
-- Description of what was changed — @who
+- **User Commands** — `/deploy`, `/status`, and `/release <version>` trigger common actions instantly.
+- **Session Start Behavior** — AI greets with project context, checks branch, and pulls latest changes.
+- **Git Init & .gitignore Detection** — Detects if project isn't a git repo and offers setup.
 
 ### Fixed
-- Description of what was fixed — @who
+- Branch strategy choice is now respected.
+- "No" at confirmation steps is now handled correctly.
+- `/deploy` now pulls latest main first.
+- `/release` now updates `PROJECT-TRACKER.md`.
+- Review step now shows a diff (`git log` and `git diff --stat`).
+- Fixed `ABOUT.md` referencing non-existent file.
 
-### Removed
-- Description of what was removed — @who
--->
+---
 
-<!-- 
-INSTRUCTIONS FOR AI ASSISTANTS:
-- Before every commit, add a new entry under [Unreleased] or create a new version section.
-- Always include the date and who made the change.
-- When the user releases a version, move [Unreleased] items under the new version heading.
-- Use the categories: Added, Changed, Fixed, Removed.
-- Keep entries concise but descriptive.
--->
+## [1.0.0] - 2026-05-11
+
+### Added
+- Initial release — core workflow, changelog, tracker, git procedure, team guide.

@@ -7,8 +7,8 @@
 1. Check if `PROJECT-CONFIG.md` exists in the project root.
    - If it does NOT exist, run the **First-Time Project Setup** below.
    - If it does exist, read it and greet the user with a brief summary: project name, current branch, and any uncommitted changes.
-2. Ensure the user is on the correct working branch (usually `development`). If they are on `main`, let them know and ask if they'd like to switch to `development` before starting work.
-3. Pull the latest changes from the remote for the current branch to avoid working on stale code.
+2. Ensure the user is on the correct working branch (usually `development`). If they are on `main` and the project uses a development branch, let them know and ask if they'd like to switch to `development` before starting work.
+3. If a remote is configured, pull the latest changes from the remote for the current branch to avoid working on stale code. If no remote is configured yet, skip this step silently.
 
 ---
 
@@ -26,7 +26,7 @@ Ask these questions one at a time. Wait for each answer before asking the next:
 4. **Deploy Command** — "What is the command to deploy your project? (e.g., `npx wrangler deploy`, `vercel --prod`, `npm run deploy`, or 'none' if manual)"
 5. **Tech Stack** — "What technologies does this project use? (e.g., Python, Node.js, React, vanilla JS, etc.)"
 6. **Team Members** — "Who is working on this project? (list names so commits and changelog entries can be attributed)"
-7. **Repository URL** — "What is the Git repository URL? (e.g., https://github.com/username/repo.git)"
+7. **Repository URL** — "What is the Git repository URL? (e.g., https://github.com/username/repo.git, or 'none' if not set up yet)"
 8. **Branch Strategy** — "Do you use a `development` branch before merging to `main`? (yes/no — default: yes)"
 
 After collecting answers, generate `PROJECT-CONFIG.md` with the responses and confirm with the user.
@@ -36,6 +36,7 @@ After collecting answers, generate `PROJECT-CONFIG.md` with the responses and co
 After setup, the AI assistant MUST also check:
 - If the project is **not** a git repository, ask the user: "This project isn't a git repo yet. Want me to run `git init` and set it up?"
 - If there is **no `.gitignore`** file, create a sensible one based on the tech stack (e.g., `node_modules/`, `.env`, `__pycache__/`, etc.) and confirm with the user.
+- If a repository URL was provided but no remote is configured, set it up with `git remote add origin <url>`.
 
 ---
 
@@ -49,10 +50,13 @@ After setup, the AI assistant MUST also check:
 3. Update `PROJECT-TRACKER.md` with today's work
 4. Commit to local `development` branch (wait for user confirmation)
 5. Push to `origin/development` (wait for user confirmation)
-6. Show the user a diff summary of dev vs main and ask them to review (wait for user confirmation)
-7. Checkout `main`, pull latest from `origin/main`, merge `development` into local `main` (wait for user confirmation)
-8. Push local `main` to `origin/main` (wait for user confirmation)
-9. Deploy using the project's deploy command from `PROJECT-CONFIG.md` (wait for user confirmation)
+6. **Stop here.** Ask the user: "Changes pushed to development. Want to merge to main and deploy, or keep working?"
+   - If the user wants to **keep working**, stop the workflow. Resume from step 1 when they make more changes.
+   - If the user wants to **merge and deploy**, continue to step 7.
+7. Show the user a diff summary of dev vs main and ask them to review (wait for user confirmation)
+8. Checkout `main`, pull latest from `origin/main`, merge `development` into local `main` (wait for user confirmation)
+9. Push local `main` to `origin/main` (wait for user confirmation)
+10. Deploy using the project's deploy command from `PROJECT-CONFIG.md` (wait for user confirmation)
 
 ### If the user chose NO development branch (direct to main):
 1. Make changes
@@ -60,7 +64,10 @@ After setup, the AI assistant MUST also check:
 3. Update `PROJECT-TRACKER.md` with today's work
 4. Commit to local `main` branch (wait for user confirmation)
 5. Push to `origin/main` (wait for user confirmation)
-6. Deploy using the project's deploy command from `PROJECT-CONFIG.md` (wait for user confirmation)
+6. Ask the user: "Changes pushed to main. Want to deploy now, or keep working?"
+   - If the user wants to **keep working**, stop the workflow.
+   - If the user wants to **deploy**, continue to step 7.
+7. Deploy using the project's deploy command from `PROJECT-CONFIG.md` (wait for user confirmation)
 
 Never skip steps. Never push to main without explicit user approval.
 
